@@ -2,13 +2,7 @@ from tkinter import *
 from tkinter import messagebox
 import SimpleQIWI
 
-#api_q = StringVar()
 
-#api_q_entry = Entry(textvariable=api_q)
-
-def show_message_api():
-    api = message.get()
-    return api
 
 def show_message():
 	messagebox_showinfo("Donate", text="Спасибо от автора за рубль!")
@@ -27,16 +21,32 @@ root.geometry('400x400')
 def exit():
 	root.quit()
 
-message = StringVar()
+# инпуты
+api = Entry(root)
+api.insert(0, 'Укажите QiWi API')
+tel = Entry(root)
+tel.insert(0, 'Ваш номер QiWi')
+api.pack()
+tel.pack()
 
-
-message_entry = Entry(textvariable=message)
-message_entry.place(relx=.5, rely=.1, anchor="c")
-message_entry.insert(0, "Введите QiWi API")
-
+tel1 = Entry(root)
+tel1.insert(0, 'Киви 1')
+tel1.pack()
+tel2 = Entry(root)
+tel2.insert(0, 'Киви 2')
+tel2.pack()
+tel3 = Entry(root)
+tel3.insert(0, 'Киви 3')
+tel3.pack()
+tel4 = Entry(root)
+tel4.insert(0, 'Киви 4')
+tel4.pack()
+tel5 = Entry(root)
+tel5.insert(0, 'Киви 5')
+tel5.pack()
 # Кнопки
 
-message_button = Button(text="Произвести переводы", command=show_message_api)
+message_button = Button(text="Произвести переводы", command=quit)
 message_button.place(relx=.5, rely=.5, anchor="c")
 
 button1 = Button(root, text="Выход", command=exit)
