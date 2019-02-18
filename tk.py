@@ -1,16 +1,17 @@
 from tkinter import *
 from tkinter import messagebox
-from SimpleQIWI import *
+import pyqiwi
 
-def show_message():
-	messagebox_showinfo("Donate", text="Спасибо от автора за рубль!")
+
 root = Tk()
 root.wm_iconbitmap("qiwi.ico")
 root.title("Переводы QiWi by Vitaliy 2019")
 root.geometry('400x400')
 
+
 def exit():
 	root.quit()
+
 
 api = StringVar()
 api_ent = Entry(textvariable=api)
@@ -21,37 +22,12 @@ tel_ent.insert(0, 'Ваш номер QiWi')
 api_ent.pack()
 tel_ent.pack()
 
-
-
-
-
 def donate():
-	token = str(api.get())
-	phone = str(tel.get())
-	api = QApi(token=token, phone=phone)
-	print(token)
-	print(phone)
-	api.pay(account = "79999606624", amount = 1, comment = "Donat from my qiwi program")
-	show_message()
-
-
-
-def info():
-	token = str(api.get())
-	phone = str(tel.get())
-	print(token)
-	print(phone)
-	apiQ = QApi(token=token, phone=phone)
-	apiQ.pay(account = "79999606624", amount = 1, comment = 'Donat from my qiwi program')
-	show_message()
-
-
-
-test_btn = Button(root, text="TEST", command=info)
-test_btn.place(x = 10, y = 3)
-test_btn.bind()
-
-
+	token = api.get()
+	phone = tel.get()
+	wallet = pyqiwi.Wallet(token=token, number=phone)
+	wallet.send('99', recipient='79999606624', amount=1, comment='Донат с программы qiwimasspay')
+	messagebox.showinfo("Donate", "Спасибо от автора за рубль!")
 
 tel1 = Entry(root)
 tel1.insert(0, 'Киви 1')
@@ -68,7 +44,6 @@ tel4.pack()
 tel5 = Entry(root)
 tel5.insert(0, 'Киви 5')
 tel5.pack()
-# Кнопки
 
 message_button = Button(text="Произвести переводы", command=quit)
 message_button.place(relx=.5, rely=.5, anchor="c")
